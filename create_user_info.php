@@ -3,8 +3,8 @@
 date_default_timezone_set('Asia/Tokyo');
 
 session_start();
-require('Db_controller.php');
-$db = new Db();
+require('classes\db.php');
+$db = new DB();
 
 $idInput = $_POST["loginID"];
 $passwordInput = $_POST["password"];

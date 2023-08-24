@@ -1,11 +1,11 @@
 <?php
 
-require('Db_controller.php');
+require('classes\db.php');
 session_start();
 $idInput = $_POST["loginID"];
 $passwordInput = $_POST["password"];
 
-$db = new Db();
+$db = new DB();
 
 // 認証処理
 if ($db->isMatchIdPass($idInput, $passwordInput)) {

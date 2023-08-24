@@ -1,6 +1,7 @@
 <?php
-require('Menu.php');
+require('classes/Menu.php');
 
+// デバッグ用↓
 if (isset($_POST['mail'])) {
     echo '入力されたアドレス: ' . $_POST['mail'];
 }

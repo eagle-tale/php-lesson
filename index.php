@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('Menu.php');
+require('classes/Menu.php');
 
 if (isset($_SESSION['id'])) {
     $username = $_SESSION['id'];

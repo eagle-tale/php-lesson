@@ -1,8 +1,8 @@
 <?php
 session_start();
-require('Menu.php');
-require('Db_controller.php');
-$db = new Db();
+require('classes/Menu.php');
+require('classes\db.php');
+$db = new DB();
 
 ?>
 
