@@ -1,6 +1,10 @@
 <?php
 session_start();
+<<<<<<< Updated upstream
 require('classes/Menu.php');
+=======
+require('views\Menu.php');
+>>>>>>> Stashed changes
 
 if (isset($_SESSION['id'])) {
     $username = $_SESSION['id'];
@@ -51,7 +55,7 @@ if (isset($_SESSION['id'])) {
     <?php } else { ?>
 
         <h2>ログイン</h2>
-        <form method="post" action="login.php">
+        <form method="post" action="views\login_user_action.php">
             <label for="loginID">LoginID:</label>
             <input type="text" id="loginID" name="loginID" required><br><br>
             <label for="password">Password:</label>
@@ -59,7 +63,7 @@ if (isset($_SESSION['id'])) {
             <input type="submit" value="Login">
         </form>
 
-        <p><a href="./register.php">ユーザー登録</a></p>
+        <p><a href="./views/register.php">ユーザー登録</a></p>
 
     <?php } ?>
 

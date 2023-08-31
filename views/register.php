@@ -9,14 +9,14 @@
 
 <body>
     <h2>ユーザー情報</h2>
-    <form action="./create_user_info.php" method="post">
+    <form action="./register_user_action.php" method="post">
         <label for="loginID">LoginID:</label>
         <input type="text" id="loginID" name="loginID" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="送信">
     </form>
-    <p>すでに登録済みの方は<a href="./">こちら</a></p>
+    <p>すでに登録済みの方は<a href="../">こちら</a></p>
 </body>
 
 </html>
