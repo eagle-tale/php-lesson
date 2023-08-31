@@ -13,7 +13,7 @@ $userList_array = $controller->userList();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー一覧</title>
-    <link rel="stylesheet" href="user_list.css">
+    <link rel="stylesheet" href="../user_list.css">
 </head>
 
 <body>

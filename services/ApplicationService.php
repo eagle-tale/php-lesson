@@ -14,9 +14,9 @@ class ApplicationService
         $this->userService = $userService;
     }
 
-    public function register($id, $password)
+    public function register($id, $password, $birthday)
     {
-        $newUser = new UserModel($id);
+        $newUser = new UserModel($id, $birthday);
 
         // userServiceで重複確認
         if ($this->userService->exists($newUser)) {

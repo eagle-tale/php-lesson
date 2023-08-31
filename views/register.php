@@ -14,6 +14,8 @@
         <input type="text" id="loginID" name="loginID" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
+        <label for="birthday">誕生日:</label>
+        <input type="date" id="birthday" name="birthday"><br><br>
         <input type="submit" value="送信">
     </form>
     <p>すでに登録済みの方は<a href="./">こちら</a></p>

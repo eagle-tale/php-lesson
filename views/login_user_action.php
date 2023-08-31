@@ -16,10 +16,10 @@ if ($isSuccess) {
     $_SESSION['permission'] = $userInfo->permission;
 
     $_SESSION['msg'] = 'ログインしました。';
-    header('Location: ../');
+    header('Location: ./');
     exit();
 } else {
     $_SESSION['msg'] = 'IDもしくはパスワードが間違っています。';
-    header('Location: ../');
+    header('Location: ./');
     exit();
 }

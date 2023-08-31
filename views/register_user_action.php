@@ -1,13 +1,13 @@
 <?php
-
 include_once('..\controllers\UserController.php');
 date_default_timezone_set('Asia/Tokyo');
 
 session_start();
 $idInput = $_POST["loginID"];
 $passwordInput = $_POST["password"];
+$birthdayInput = $_POST["birthday"];
 $controller = new UserController();
-$isSuccess = $controller->register($idInput, $passwordInput);
+$isSuccess = $controller->register($idInput, $passwordInput, $birthdayInput);
 
 // 認証処理
 if (!$isSuccess) {

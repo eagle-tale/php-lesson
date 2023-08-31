@@ -52,10 +52,12 @@ class UserRepository implements IUserRepository
             $hash_pass = password_hash($password, PASSWORD_DEFAULT);
 
             $loginId = $user->loginId;
-            $query = 'INSERT INTO users(loginId, password) VALUES(:loginId, :password);';
+            $birthday = $user->birthday;
+            $query = 'INSERT INTO users(loginId, password, birthday) VALUES(:loginId, :password, :birthday);';
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':loginId', $loginId);
             $stmt->bindParam(':password', $hash_pass);
+            $stmt->bindParam(':birthday', $birthday);
             $stmt->execute();
         } catch (PDOException $e) {
             echo ('データベースエラー（PDOエラー）:' . $e->getMessage());

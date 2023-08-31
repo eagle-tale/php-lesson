@@ -11,8 +11,9 @@ class UserModel
     public $permission;
     public $createdDate;
 
-    public function __construct($loginId)
+    public function __construct($loginId, $birthday = "")
     {
         $this->loginId = $loginId;
+        $this->birthday = $birthday;
     }
 }

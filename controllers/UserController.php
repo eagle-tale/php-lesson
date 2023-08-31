@@ -15,9 +15,9 @@ class UserController
         $this->applicationService = ApplicationServiceFactory::createApplicationService(Config::getEnvironment());
     }
 
-    public function register($id, $password)
+    public function register($id, $password, $birthday)
     {
-        return $this->applicationService->register($id, $password);
+        return $this->applicationService->register($id, $password, $birthday);
     }
 
     public function login($id, $password)

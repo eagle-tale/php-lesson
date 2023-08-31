@@ -51,7 +51,7 @@ if (isset($_SESSION['id'])) {
     <?php } else { ?>
 
         <h2>ログイン</h2>
-        <form method="post" action="views\login_user_action.php">
+        <form method="post" action=".\login_user_action.php">
             <label for="loginID">LoginID:</label>
             <input type="text" id="loginID" name="loginID" required><br><br>
             <label for="password">Password:</label>

@@ -1,5 +1,6 @@
 <?php
-interface IUserRepository {
+interface IUserRepository
+{
     public function find($id);
 
     public function findAll();
