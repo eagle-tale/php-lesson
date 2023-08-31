@@ -16,7 +16,7 @@
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="送信">
     </form>
-    <p>すでに登録済みの方は<a href="../">こちら</a></p>
+    <p>すでに登録済みの方は<a href="./">こちら</a></p>
 </body>
 
 </html>

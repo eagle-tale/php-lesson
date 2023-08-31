@@ -59,7 +59,7 @@ class ApplicationService
                 $user['loginId'],
                 $user['birthday'],
                 $user['permission'],
-                $user['createDate']
+                $user['createdDate']
             );
         }, $users);
     }
