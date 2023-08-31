@@ -1,26 +1,17 @@
 <?php
 
 // クラス宣言
-<<<<<<<< Updated upstream:classes/db.php
-class DB
-========
 class Db_controller
->>>>>>>> Stashed changes:__unuse/Db_controller.php
 {
     static private $_instance = null;
 
     // プロパティ
-    private static DB $instance = null;
     //接続するデータベースの情報
-    private PDO $pdo;
-    private string $dsn = 'mysql:host=localhost;dbname=nanobase_07;port=3306';
-    private string $user = 'root';
-    private string $password = '';
+    protected $dsn = 'mysql:host=localhost;dbname=nanobase_07;port=3306';
+    protected $user = 'root';
+    protected $password = '';
 
-<<<<<<<< Updated upstream:classes/db.php
-========
     public $pdo;
->>>>>>>> Stashed changes:__unuse/Db_controller.php
 
     // コンストラクタ
     private function __construct()
@@ -30,7 +21,7 @@ class Db_controller
             $this->pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_PERSISTENT => true));
         } catch (PDOException $e) {
             // データベースへの接続に失敗した場合
-            die($e->getMessage());
+            echo ('データベースに接続できませんでした。' . $e->getMessage());
         }
     }
 
@@ -43,13 +34,6 @@ class Db_controller
 
     // メソッド
 
-    public static function getInstance(): ?DB
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new DB();
-        }
-        return self::$instance;
-    }
     ///
     // ログイン時の認証
     ///
@@ -81,7 +65,6 @@ class Db_controller
     ///
     // GET:ユーザー情報
     // 引数で与えられたユーザーの情報を返す
-    // ⇒オブジェクトで返すようにした方がいい
     ///
     public function get_UserInfo($id): ?array
     {

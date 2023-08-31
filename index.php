@@ -1,10 +1,6 @@
 <?php
 session_start();
-<<<<<<< Updated upstream
-require('classes/Menu.php');
-=======
 require('views\Menu.php');
->>>>>>> Stashed changes
 
 if (isset($_SESSION['id'])) {
     $username = $_SESSION['id'];

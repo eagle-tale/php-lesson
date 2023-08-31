@@ -4,12 +4,6 @@ include_once('..\controllers\UserController.php');
 date_default_timezone_set('Asia/Tokyo');
 
 session_start();
-<<<<<<< Updated upstream:create_user_info.php
-require('classes\db.php');
-$db = new DB();
-
-=======
->>>>>>> Stashed changes:views/register_user_action.php
 $idInput = $_POST["loginID"];
 $passwordInput = $_POST["password"];
 $controller = new UserController();
