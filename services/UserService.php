@@ -18,6 +18,20 @@ class UserService
         return !empty($res);
     }
 
+    public function delete(UserModel $user)
+    {
+        $res = $this->userRepository->delete($user->loginId);
+        return true;
+    }
+
+    public function update(UserModel $oldUser, UserModel $newUser)
+    {
+        $res = $this->userRepository->update($oldUser, $newUser);
+        return true;
+    }
+
+
+
     public function isValidUserInfo($id, $password)
     {
         $res = $this->userRepository->find($id);

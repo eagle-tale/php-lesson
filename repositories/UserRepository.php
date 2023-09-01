@@ -64,4 +64,36 @@ class UserRepository implements IUserRepository
             throw $e;
         }
     }
+
+    public function delete(UserModel $user)
+    {
+        try {
+            $loginId = $user->loginId;
+            $query = 'DELETE FROM users WHERE loginId = :loginId;';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':loginId', $loginId);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function update(UserModel $oldUser, UserModel $newUser)
+    {
+        try {
+            $loginId = $oldUser->loginId;
+            $new_loginId = $newUser->loginId;
+            $new_birthday = $newUser->birthday;
+            $query = 'UPDATE users SET loginId = :new_loginId, birthday = :new_birthday WHERE loginId = :loginId;';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':loginId', $loginId);
+            $stmt->bindParam(':new_loginId', $new_loginId);
+            $stmt->bindParam(':new_birthday', $new_birthday);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

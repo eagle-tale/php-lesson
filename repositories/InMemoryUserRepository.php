@@ -29,4 +29,14 @@ class InMemoryUserRepository implements IUserRepository
         $hash_pass = password_hash($password, PASSWORD_DEFAULT);
         $this->userStore->save($user);
     }
+
+    public function delete(UserModel $user)
+    {
+        $this->userStore->delete($user);
+    }
+
+    public function update(UserModel $oldUser, UserModel $newUser)
+    {
+        $this->userStore->update($oldUser, $newUser);
+    }
 }

@@ -13,7 +13,7 @@ $userList_array = $controller->userList();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー一覧</title>
-    <link rel="stylesheet" href="../user_list.css">
+    <link rel="stylesheet" href="./user_list.css">
 </head>
 
 <body>
@@ -59,9 +59,20 @@ $userList_array = $controller->userList();
 
 
     <!-- メニュー表示 -->
-    <?php $menu = new Menu;
-    $menu->show();
-    ?>
+    <?php if ($_SESSION['permission'] == 1) { ?>
+        <ul>
+            <li>管理者用メニュー
+                <ul>
+                    <li><a href="./user_list.php">ユーザー情報変更</a></li>
+                    <li><a href="./user_list.php">ユーザー情報削除</a></li>
+                </ul>
+            </li>
+        <?php } ?>
+        <!-- 通常メニュー -->
+        <?php $menu = new Menu;
+        $menu->show();
+        ?>
+        </ul>
 </body>
 
 </html>

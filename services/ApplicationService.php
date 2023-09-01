@@ -14,9 +14,9 @@ class ApplicationService
         $this->userService = $userService;
     }
 
-    public function register($id, $password, $birthday)
+    public function register($loginId, $password, $birthday)
     {
-        $newUser = new UserModel($id, $birthday);
+        $newUser = new UserModel($loginId, $birthday);
 
         // userServiceで重複確認
         if ($this->userService->exists($newUser)) {
@@ -73,5 +73,39 @@ class ApplicationService
             $permission,
             $createDate
         );
+    }
+
+    public function delete($loginId)
+    {
+        $user = new UserModel($loginId);
+
+        // メモ：本来であればここで一度管理者による実行かどうかチェックした方がよい
+        // （ブラウザ側のSESSIONでのみ判断しているため）
+
+        // userServiceで重複確認
+        if (!$this->userService->exists($user)) {
+            throw new ApplicationServiceException('そのユーザーは存在しません');
+        }
+
+        // userRepositoryで削除
+        $this->userRepository->delete($user);
+    }
+
+    public function update($oldLoginId, $newLoginId, $birthday)
+    {
+        $oldUser = new UserModel($oldLoginId);
+        $newUser = new UserModel($newLoginId, $birthday);
+
+        // メモ：本来であればここで一度管理者による実行かどうかチェックした方がよい
+        // （ブラウザ側のSESSIONでのみ判断しているため）
+
+        // userServiceで重複確認
+        if (!$this->userService->exists($oldUser)) {
+            throw new ApplicationServiceException('そのユーザーは存在しません');
+        }
+
+        // userRepositoryで更新
+        $this->userRepository->update($oldUser, $newUser);
+        return true;
     }
 }
