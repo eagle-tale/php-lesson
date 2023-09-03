@@ -52,8 +52,8 @@ if (isset($_SESSION['id'])) {
 
         <h2>ログイン</h2>
         <form method="post" action=".\login_user_action.php">
-            <label for="loginID">LoginID:</label>
-            <input type="text" id="loginID" name="loginID" required><br><br>
+            <label for="mail">LoginID(mail):</label>
+            <input type="text" id="mail" name="mail" required><br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br><br>
             <input type="submit" value="Login">

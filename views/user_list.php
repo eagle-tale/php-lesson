@@ -40,7 +40,7 @@ $userList_array = $controller->userList();
                 ?>
                         <tr>
                             <td><?php echo $user->id; ?></td>
-                            <td><?php echo $user->loginId; ?></td>
+                            <td><?php echo $user->mail; ?></td>
                             <td><?php echo $user->birthday; ?></td>
                             <?php if ($_SESSION['permission'] == 1) { ?>
                                 <td><?php echo $user->createdDate; ?></td>
@@ -63,8 +63,7 @@ $userList_array = $controller->userList();
         <ul>
             <li>管理者用メニュー
                 <ul>
-                    <li><a href="./user_list.php">ユーザー情報変更</a></li>
-                    <li><a href="./user_list.php">ユーザー情報削除</a></li>
+                    <li><a href="./user_list_edit.php">ユーザー情報変更・削除</a></li>
                 </ul>
             </li>
         <?php } ?>

@@ -13,14 +13,14 @@ class UserService
 
     public function exists(UserModel $user)
     {
-        $res = $this->userRepository->find($user->loginId);
+        $res = $this->userRepository->find($user->mail);
         // 戻り値にユーザーデータが入っていればすでに存在するデータ
         return !empty($res);
     }
 
     public function delete(UserModel $user)
     {
-        $res = $this->userRepository->delete($user->loginId);
+        $res = $this->userRepository->delete($user->mail);
         return true;
     }
 

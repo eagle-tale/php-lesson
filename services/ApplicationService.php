@@ -14,9 +14,9 @@ class ApplicationService
         $this->userService = $userService;
     }
 
-    public function register($loginId, $password, $birthday)
+    public function register($mail, $password, $birthday)
     {
-        $newUser = new UserModel($loginId, $birthday);
+        $newUser = new UserModel($mail, $birthday);
 
         // userServiceで重複確認
         if ($this->userService->exists($newUser)) {
@@ -42,7 +42,7 @@ class ApplicationService
         $userInfo = $this->userRepository->find($id);
         return $this->createUserResponseData(
             $userInfo['id'],
-            $userInfo['loginId'],
+            $userInfo['mail'],
             $userInfo['birthday'],
             $userInfo['permission'],
             $userInfo['createdDate']
@@ -56,7 +56,7 @@ class ApplicationService
         return array_map(function ($user) {
             return $this->createUserResponseData(
                 $user['id'],
-                $user['loginId'],
+                $user['mail'],
                 $user['birthday'],
                 $user['permission'],
                 $user['createdDate']
@@ -64,20 +64,20 @@ class ApplicationService
         }, $users);
     }
 
-    private function createUserResponseData($id, $loginId, $birthday, $permission, $createDate)
+    private function createUserResponseData($id, $mail, $birthday, $permission, $createDate)
     {
         return new UserResponseData(
             $id,
-            $loginId,
+            $mail,
             $birthday,
             $permission,
             $createDate
         );
     }
 
-    public function delete($loginId)
+    public function delete($mail)
     {
-        $user = new UserModel($loginId);
+        $user = new UserModel($mail);
 
         // メモ：本来であればここで一度管理者による実行かどうかチェックした方がよい
         // （ブラウザ側のSESSIONでのみ判断しているため）
@@ -99,10 +99,18 @@ class ApplicationService
         // メモ：本来であればここで一度管理者による実行かどうかチェックした方がよい
         // （ブラウザ側のSESSIONでのみ判断しているため）
 
-        // userServiceで重複確認
+        // userServiceで存在確認
         if (!$this->userService->exists($oldUser)) {
             throw new ApplicationServiceException('そのユーザーは存在しません');
         }
+
+        // userServiceで重複確認
+        if ($this->userService->exists($newUser)) {
+            throw new ApplicationServiceException('すでにそのmailは登録されています');
+        }
+
+
+        $oldUser->birthday = $this->userRepository->find($oldUser->id)->birthday;
 
         // userRepositoryで更新
         $this->userRepository->update($oldUser, $newUser);

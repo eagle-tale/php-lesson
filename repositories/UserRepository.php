@@ -19,7 +19,7 @@ class UserRepository implements IUserRepository
     public function find($id)
     {
         try {
-            $query = "SELECT * FROM users WHERE loginId = :id;";
+            $query = "SELECT * FROM users WHERE mail = :id;";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':id', $id, PDO::PARAM_STR);
             $stmt->execute();
@@ -34,7 +34,7 @@ class UserRepository implements IUserRepository
     public function findAll()
     {
         try {
-            $query = 'SELECT id, loginId, birthday, permission, createdDate FROM users';
+            $query = 'SELECT id, mail, birthday, permission, createdDate FROM users';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             $queryResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -51,11 +51,11 @@ class UserRepository implements IUserRepository
         try {
             $hash_pass = password_hash($password, PASSWORD_DEFAULT);
 
-            $loginId = $user->loginId;
+            $mail = $user->mail;
             $birthday = $user->birthday;
-            $query = 'INSERT INTO users(loginId, password, birthday) VALUES(:loginId, :password, :birthday);';
+            $query = 'INSERT INTO users(mail, password, birthday) VALUES(:mail, :password, :birthday);';
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':loginId', $loginId);
+            $stmt->bindParam(':mail', $mail);
             $stmt->bindParam(':password', $hash_pass);
             $stmt->bindParam(':birthday', $birthday);
             $stmt->execute();
@@ -68,10 +68,10 @@ class UserRepository implements IUserRepository
     public function delete(UserModel $user)
     {
         try {
-            $loginId = $user->loginId;
-            $query = 'DELETE FROM users WHERE loginId = :loginId;';
+            $mail = $user->mail;
+            $query = 'DELETE FROM users WHERE mail = :mail;';
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':loginId', $loginId);
+            $stmt->bindParam(':mail', $mail);
             $stmt->execute();
         } catch (PDOException $e) {
             echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
@@ -81,14 +81,14 @@ class UserRepository implements IUserRepository
 
     public function update(UserModel $oldUser, UserModel $newUser)
     {
+        $new_mail = !empty($newUser->mail) ? $newUser->mail : $oldUser->mail;
+        $new_birthday = !empty($newUser->birthday) ? $newUser->birthday : $oldUser->birthday;
+
         try {
-            $loginId = $oldUser->loginId;
-            $new_loginId = $newUser->loginId;
-            $new_birthday = $newUser->birthday;
-            $query = 'UPDATE users SET loginId = :new_loginId, birthday = :new_birthday WHERE loginId = :loginId;';
+            $query = 'UPDATE users SET mail = :new_mail, birthday = :new_birthday WHERE mail = :mail;';
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':loginId', $loginId);
-            $stmt->bindParam(':new_loginId', $new_loginId);
+            $stmt->bindParam(':mail', $oldUser->mail);
+            $stmt->bindParam(':new_mail', $new_mail);
             $stmt->bindParam(':new_birthday', $new_birthday);
             $stmt->execute();
         } catch (PDOException $e) {

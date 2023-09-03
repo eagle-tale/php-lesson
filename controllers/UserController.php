@@ -34,4 +34,14 @@ class UserController
     {
         return $this->applicationService->userList();
     }
+
+    public function delete($id)
+    {
+        return $this->applicationService->delete($id);
+    }
+
+    public function update($oldMail, $newMail, $birthday)
+    {
+        return $this->applicationService->update($oldMail, $newMail, $birthday);
+    }
 }

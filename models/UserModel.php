@@ -6,14 +6,14 @@ class UserModel
 
     // プロパティ
     public $id;
-    public $loginId;
+    public $mail;
     public $birthday;
     public $permission;
     public $createdDate;
 
-    public function __construct($loginId, $birthday = "")
+    public function __construct($mail, $birthday = "")
     {
-        $this->loginId = $loginId;
+        $this->mail = $mail;
         $this->birthday = $birthday;
     }
 }

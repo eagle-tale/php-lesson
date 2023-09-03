@@ -1,16 +1,18 @@
 <?php
-class UserResponseData {
+class UserResponseData
+{
     // プロパティ
     public $id;
-    public $loginId;
+    public $mail;
     public $birthday;
     public $permission;
     public $createdDate;
 
     // TODO: 本当はコンストラクタでUserModel受け取った方が良い
-    public function __construct($id, $loginId, $birthday, $permission, $createdDate) {
+    public function __construct($id, $mail, $birthday, $permission, $createdDate)
+    {
         $this->id = $id;
-        $this->loginId = $loginId;
+        $this->mail = $mail;
         $this->birthday = $birthday;
         $this->permission = $permission;
         $this->createdDate = $createdDate;

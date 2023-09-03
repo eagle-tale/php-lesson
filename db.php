@@ -25,8 +25,9 @@ class DB
         }
     }
 
-    static public function getInstance(){
-        if (!isset($_instance)){
+    static public function getInstance()
+    {
+        if (!isset($_instance)) {
             $_instance = new DB();
         }
         return $_instance;
@@ -40,7 +41,7 @@ class DB
     public function isMatchIdPass($id, $password): ?bool
     {
         try {
-            $query = 'SELECT loginId, password, permission FROM users WHERE loginId = :id;';
+            $query = 'SELECT mail, password, permission FROM users WHERE mail = :id;';
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->execute();

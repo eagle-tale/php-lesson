@@ -3,9 +3,7 @@ include_once('..\controllers\UserController.php');
 date_default_timezone_set('Asia/Tokyo');
 
 session_start();
-$idInput = $_POST["mail"];
-$passwordInput = $_POST["password"];
-$birthdayInput = $_POST["birthday"];
+$deletingId = $_POST["mail"];
 $controller = new UserController();
 $isSuccess = $controller->register($idInput, $passwordInput, $birthdayInput);
 

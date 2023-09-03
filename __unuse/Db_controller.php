@@ -25,8 +25,9 @@ class Db_controller
         }
     }
 
-    static public function getInstance(){
-        if (!isset($_instance)){
+    static public function getInstance()
+    {
+        if (!isset($_instance)) {
             $_instance = new DB();
         }
         return $_instance;
@@ -40,7 +41,7 @@ class Db_controller
     public function isMatchIdPass($id, $password): ?bool
     {
         try {
-            $query = 'SELECT loginId, password, permission FROM users WHERE loginId = :id;';
+            $query = 'SELECT mail, password, permission FROM users WHERE mail = :id;';
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
@@ -68,7 +69,7 @@ class Db_controller
     ///
     public function get_UserInfo($id): ?array
     {
-        $query = 'SELECT loginId, permission, birthday, createdDate FROM users WHERE loginId = :id;';
+        $query = 'SELECT mail, permission, birthday, createdDate FROM users WHERE mail = :id;';
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -90,7 +91,7 @@ class Db_controller
                 echo '一般ユーザーです';
 
                 try {
-                    $query = 'SELECT id, loginId, birthday, permission FROM users';
+                    $query = 'SELECT id, mail, birthday, permission FROM users';
                     $stmt = $this->pdo->prepare($query);
                     $stmt->execute();
                     $queryResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -103,7 +104,7 @@ class Db_controller
                 echo '管理者ユーザーです';
 
                 try {
-                    $query = 'SELECT id, loginId, birthday, permission, createdDate FROM users';
+                    $query = 'SELECT id, mail, birthday, permission, createdDate FROM users';
                     $stmt = $this->pdo->prepare($query);
                     $stmt->execute();
                     $queryResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -125,13 +126,13 @@ class Db_controller
     {
         try {
             // IDが既に登録されていないか確認
-            $query = 'SELECT loginId FROM users WHERE loginId = :id;';
+            $query = 'SELECT mail FROM users WHERE mail = :id;';
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
             $queryResult = $stmt->fetch();
 
-            if ($queryResult['loginId'] ?? "") {
+            if ($queryResult['mail'] ?? "") {
                 // IDが重複している場合
                 echo '認証失敗';
                 return false;
@@ -139,7 +140,7 @@ class Db_controller
                 // IDが重複していなければinsert
                 $hash_pass = password_hash($password, PASSWORD_DEFAULT);
 
-                $query = 'INSERT INTO users(loginId, password) VALUES(:id, :password);';
+                $query = 'INSERT INTO users(mail, password) VALUES(:id, :password);';
                 $stmt = $this->pdo->prepare($query);
                 $stmt->bindParam(':id', $id);
                 $stmt->bindParam(':password', $hash_pass);

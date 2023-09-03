@@ -3,7 +3,7 @@
 include_once('..\controllers\UserController.php');
 
 session_start();
-$idInput = $_POST["loginID"];
+$idInput = $_POST["mail"];
 $passwordInput = $_POST["password"];
 $controller = new UserController();
 $isSuccess = $controller->login($idInput, $passwordInput);
@@ -12,7 +12,7 @@ $isSuccess = $controller->login($idInput, $passwordInput);
 if ($isSuccess) {
     // DBのユーザー情報をセッションに保存
     $userInfo = $controller->userInfo($idInput);
-    $_SESSION['id'] = $userInfo->loginId;
+    $_SESSION['id'] = $userInfo->mail;
     $_SESSION['permission'] = $userInfo->permission;
 
     $_SESSION['msg'] = 'ログインしました。';
