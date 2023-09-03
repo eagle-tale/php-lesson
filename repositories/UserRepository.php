@@ -67,12 +67,14 @@ class UserRepository implements IUserRepository
 
     public function delete(UserModel $user)
     {
+        // メモ：本来であれば、deletingFlagを1にする、等の方法を用い、実際にユーザーデータは消さない方がいい。
         try {
             $mail = $user->mail;
             $query = 'DELETE FROM users WHERE mail = :mail;';
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':mail', $mail);
             $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
             throw $e;

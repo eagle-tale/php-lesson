@@ -88,7 +88,7 @@ class ApplicationService
         }
 
         // userRepositoryで削除
-        $this->userRepository->delete($user);
+        return $this->userRepository->delete($user);
     }
 
     public function update($oldLoginId, $newLoginId, $birthday)

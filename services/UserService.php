@@ -35,8 +35,6 @@ class UserService
     public function isValidUserInfo($id, $password)
     {
         $res = $this->userRepository->find($id);
-        print_r('findのクエリ結果:');
-        print_r($res);
         // 認証処理(指定したハッシュがパスワードにマッチしているかチェック)
         if (password_verify($password, $res['password'])) {
             echo '認証成功';

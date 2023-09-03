@@ -3,17 +3,17 @@ include_once('..\controllers\UserController.php');
 date_default_timezone_set('Asia/Tokyo');
 
 session_start();
-$deletingId = $_POST["mail"];
+$deletingId = $_POST["deleteId"];
 $controller = new UserController();
-$isSuccess = $controller->register($idInput, $passwordInput, $birthdayInput);
+$isSuccess = $controller->delete($deletingId);
 
 // 認証処理
 if (!$isSuccess) {
-    $msg = '同じユーザーネームが存在します。';
-    $link = '<a href="register.php">戻る</a>';
+    $msg = '削除に失敗しました。';
+    $link = '<a href="./user_list_edit.php">戻る</a>';
 } else {
-    $msg = '会員登録が完了しました';
-    $link = '<a href="../">ログインページ</a>';
+    $msg = '削除が完了しました。';
+    $link = '<a href="./user_list_edit.php">戻る</a>';
 }
 ?>
 
