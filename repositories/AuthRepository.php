@@ -63,7 +63,7 @@ class AuthRepository implements IAuthRepository
     public function get_passcode($mail)
     {
         try {
-            $query = "SELECT passcode FROM auth WHERE mail = :mail;";
+            $query = "SELECT passcode, isUsed FROM auth WHERE mail = :mail;";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();

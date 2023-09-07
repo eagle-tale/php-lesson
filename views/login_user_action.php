@@ -3,7 +3,7 @@
 include_once('..\controllers\UserController.php');
 
 session_start();
-$idInput = $_POST["mail"];
+$idInput = $_POST["id"];
 $passwordInput = $_POST["password"];
 $controller = new UserController();
 $isSuccess = $controller->login($idInput, $passwordInput);

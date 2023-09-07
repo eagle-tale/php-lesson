@@ -1,4 +1,6 @@
-<?
+<?php
+
+require '../vendor/autoload.php';
 require_once '..\vendor\phpgangsta\googleauthenticator\PHPGangsta\GoogleAuthenticator.php';
 include_once('..\repositories\AuthRepository.php');
 include_once('..\models\AuthModel.php');
@@ -16,7 +18,11 @@ class AuthService
 
     public function createQR($mail)
     {
-
+        // パスコードの状態を見て、
+        // そもそも存在していなければパスコード発行&登録&QR表示
+        // 一度もログイン試行していなければQR表示
+        // 上記以外ならエラー表示
+        // ・・・させたい
         $this->authRepository->get_passcode($mail);
 
         // サービス名
@@ -33,7 +39,15 @@ class AuthService
         return $qrCodeUrl;
     }
 
-    public function createSecret()
+    public function isCodeValid($mail, $authcode)
+    {
+        // 保存されているpasscodeを取得
+        $passcode = $this->authRepository->get_passcode($mail);
+
+        return $this->ga->verifyCode($passcode, $authcode);
+    }
+
+    private function createSecret()
     {
         // 秘密鍵の生成
         $secret = $this->ga->createSecret();

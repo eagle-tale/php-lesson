@@ -14,11 +14,11 @@ class AuthController
 
     public function createQR($mail)
     {
-        $this->authService->createQR($mail);
+        return $this->authService->createQR($mail);
     }
 
-    public function createSecret()
+    public function isCodeValid($mail, $authcode)
     {
-        $this->authService->createSecret();
+        return $this->authService->isCodeValid($mail, $authcode);
     }
 }
