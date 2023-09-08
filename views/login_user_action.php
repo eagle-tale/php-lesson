@@ -15,8 +15,7 @@ if ($isSuccess) {
     $_SESSION['id'] = $userInfo->mail;
     $_SESSION['permission'] = $userInfo->permission;
 
-    $_SESSION['msg'] = 'ログインしました。';
-    header('Location: ./');
+    header('Location: ./auth.php');
     exit();
 } else {
     $_SESSION['msg'] = 'IDもしくはパスワードが間違っています。';

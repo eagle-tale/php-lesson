@@ -23,15 +23,27 @@ class AuthService
         // 一度もログイン試行していなければQR表示
         // 上記以外ならエラー表示
         // ・・・させたい
-        $this->authRepository->get_passcode($mail);
+
+        if ($this->authRepository->is_userLocked($mail)) {
+            //ロックされている場合、ログアウト
+            header('Location: ./logout.php');
+            exit;
+        }
+
+        if ($this->authRepository->is_passcodeUsed($mail)) {
+            // パスコード取得
+            $secret = $this->authRepository->get_passcode($mail);
+        } else {
+            //パスコード発行
+            $secret = $this->createSecret();
+            // パスコードのDBへの保存
+            $this->authRepository->add_passcode($mail, $secret);
+        }
 
         // サービス名
-        $title = 'TEST';
-
+        $title = 'PHPログインアプリ';
         // ユーザー名
         $name = $mail;
-
-        $secret = $this->createSecret();
 
         // QRコードURLの生成と表示
         $qrCodeUrl = $this->ga->getQRCodeGoogleUrl($name, $secret, $title);
@@ -43,8 +55,27 @@ class AuthService
     {
         // 保存されているpasscodeを取得
         $passcode = $this->authRepository->get_passcode($mail);
-
         return $this->ga->verifyCode($passcode, $authcode);
+    }
+
+    public function authSuccess($mail)
+    {
+        // isUsedを1にする
+        $this->authRepository->set_passcodeUsed($mail);
+
+        // failCountをリセットする
+        $this->authRepository->reset_failCount($mail);
+    }
+
+    public function authFailure($mail)
+    {
+        // failCountを+1する
+        $this->authRepository->add_failCount($mail);
+
+        // 規定数以上failCountがたまったらロック
+        if ($this->authRepository->find($mail)['failCount'] > 4) {
+            $this->authRepository->lock_user($mail);
+        }
     }
 
     private function createSecret()

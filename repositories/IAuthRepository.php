@@ -12,4 +12,6 @@ interface IAuthRepository
     public function reset_failCount($mail);
 
     public function lock_user($mail);
+
+    public function set_passcodeUsed($mail);
 }

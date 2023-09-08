@@ -21,4 +21,14 @@ class AuthController
     {
         return $this->authService->isCodeValid($mail, $authcode);
     }
+
+    public function authSuccess($mail)
+    {
+        $this->authService->authSuccess($mail);
+    }
+
+    public function authFailure($mail)
+    {
+        $this->authService->authFailure($mail);
+    }
 }

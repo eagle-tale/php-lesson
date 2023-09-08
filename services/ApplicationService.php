@@ -39,6 +39,7 @@ class ApplicationService
 
     public function userInfo($id)
     {
+        // TODO: 本当はUserModelを作ってcreateUserResponseDataに渡した方が良い
         $userInfo = $this->userRepository->find($id);
         return $this->createUserResponseData(
             $userInfo['id'],
@@ -52,7 +53,7 @@ class ApplicationService
     public function userList()
     {
         $users = $this->userRepository->findAll();
-
+        // TODO: 本当はUserModelを作ってcreateUserResponseDataに渡した方が良い
         return array_map(function ($user) {
             return $this->createUserResponseData(
                 $user['id'],
@@ -65,6 +66,7 @@ class ApplicationService
     }
 
     private function createUserResponseData($id, $mail, $birthday, $permission, $createDate)
+    // TODO: 本当はUserModelを受け取ってUserResponseDataに渡した方が良い
     {
         return new UserResponseData(
             $id,
