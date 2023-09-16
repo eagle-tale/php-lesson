@@ -122,13 +122,11 @@ class AuthRepository implements IAuthRepository
 
     public function is_passcodeUsed($mail)
     {
-        $isUsed = $this->find($mail)['isUsed'];
-        return $isUsed;
+        return !empty($this->find($mail)['isUsed']);
     }
 
     public function is_userLocked($mail)
     {
-        $isLocked = $this->find($mail)['isLock'];
-        return $isLocked;
+        return !empty($this->find($mail)['isLock']);
     }
 }

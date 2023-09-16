@@ -41,6 +41,12 @@ class ApplicationService
     {
         // TODO: 本当はUserModelを作ってcreateUserResponseDataに渡した方が良い
         $userInfo = $this->userRepository->find($id);
+
+        if ($userInfo == NULL) {
+            // IDが見つからない場合
+            return NULL;
+        }
+
         return $this->createUserResponseData(
             $userInfo['id'],
             $userInfo['mail'],
