@@ -124,4 +124,9 @@ class ApplicationService
         $this->userRepository->update($oldUser, $newUser);
         return true;
     }
+
+    public function updatePassword($id, $password)
+    {
+        return $this->userRepository->updatePassword($id, $password);
+    }
 }

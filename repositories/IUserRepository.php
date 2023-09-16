@@ -10,4 +10,6 @@ interface IUserRepository
     public function delete(UserModel $user);
 
     public function update(UserModel $oldUser, UserModel $newUser);
+
+    public function updatePassword(int $id, $new_password);
 }

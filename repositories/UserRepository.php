@@ -98,4 +98,19 @@ class UserRepository implements IUserRepository
             throw $e;
         }
     }
+
+    public function updatePassword($id, $new_password)
+    {
+        $hash_pass = password_hash($new_password, PASSWORD_DEFAULT);
+        try {
+            $query = 'UPDATE users SET password = :password WHERE id = :id;';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':password', $hash_pass);
+            $stmt->bindParam(':id', $id);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

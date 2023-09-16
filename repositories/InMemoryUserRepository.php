@@ -39,4 +39,9 @@ class InMemoryUserRepository implements IUserRepository
     {
         $this->userStore->update($oldUser, $newUser);
     }
+
+    public function updatePassword(int $id, $new_password)
+    {
+        return true;
+    }
 }

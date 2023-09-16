@@ -38,7 +38,7 @@ class ReminderRepository implements IReminderRepository
             $stmt->bindValue(':hash', $hash, PDO::PARAM_STR);
             $stmt->execute();
             $queryResult = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $queryResult;
+            return $queryResult['user_id'];
         } catch (PDOException $e) {
             echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
             throw $e;

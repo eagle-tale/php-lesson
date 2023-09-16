@@ -44,4 +44,9 @@ class UserController
     {
         return $this->applicationService->update($oldMail, $newMail, $birthday);
     }
+
+    public function updatePassword($id, $password)
+    {
+        return $this->applicationService->updatePassword($id, $password);
+    }
 }
