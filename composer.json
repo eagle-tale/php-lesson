@@ -1,0 +1,9 @@
+{
+    "require": {
+        "phpgangsta/googleauthenticator": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.3",
+        "vimeo/psalm": "^5.15"
+    }
+}
