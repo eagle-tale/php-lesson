@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('Menu.php');
+include_once('.\Menu.php');
 include_once('..\controllers\UserController.php');
 $controller = new UserController();
 $userList_array = $controller->userList();

@@ -1,4 +1,7 @@
 <?php
+
+use function PHPUnit\Framework\isEmpty;
+
 include_once('..\exceptions\ApplicationServiceException.php');
 include_once('..\models\UserModel.php');
 include_once('..\data\UserResponseData.php');
@@ -95,33 +98,37 @@ class ApplicationService
             throw new ApplicationServiceException('そのユーザーは存在しません');
         }
 
-        // userRepositoryで削除
-        return $this->userRepository->delete($user);
+        // userServiceで削除
+        return $this->userService->delete($user);
     }
 
     public function update($oldLoginId, $newLoginId, $birthday)
     {
-        $oldUser = new UserModel($oldLoginId);
-        $newUser = new UserModel($newLoginId, $birthday);
-
-        // メモ：本来であればここで一度管理者による実行かどうかチェックした方がよい
+        // TODO：本来であれば管理者による実行かどうかチェックした方がよい
         // （ブラウザ側のSESSIONでのみ判断しているため）
+
+        $oldUser = new UserModel($oldLoginId);
+        $oldUser->birthday = $this->userRepository->find($oldUser->mail)['birthday'];
+        $birthday = !empty($birthday) ? $birthday : $oldUser->birthday;
+        $newUser = new UserModel($newLoginId, $birthday);
 
         // userServiceで存在確認
         if (!$this->userService->exists($oldUser)) {
             throw new ApplicationServiceException('そのユーザーは存在しません');
         }
 
-        // userServiceで重複確認
-        if ($this->userService->exists($newUser)) {
-            throw new ApplicationServiceException('すでにそのmailは登録されています');
+        if (!empty($newLoginId)) {
+            // 変更後のメールアドレスが入力されている場合
+            // userServiceで重複確認
+            if ($this->userService->exists($newUser)) {
+                throw new ApplicationServiceException('すでにそのmailは登録されています');
+            }
+        } else {
+            $newUser->mail = $oldUser->mail;
         }
 
-
-        $oldUser->birthday = $this->userRepository->find($oldUser->id)->birthday;
-
-        // userRepositoryで更新
-        $this->userRepository->update($oldUser, $newUser);
+        // userServiceで更新
+        $this->userService->update($oldUser, $newUser);
         return true;
     }
 

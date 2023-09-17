@@ -1,7 +1,7 @@
 <?php
 interface IAuthRepository
 {
-    public function find($id);
+    public function find($mail);
 
     public function add_passcode($mail, $passcode);
 

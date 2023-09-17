@@ -1,19 +1,15 @@
 <?php
 
 include_once('..\repositories\IAuthRepository.php');
-include_once('..\models\AuthModel.php');
 include_once('..\db.php');
 
 class AuthRepository implements IAuthRepository
 {
-    private readonly DB $db;
     private readonly PDO $pdo;
 
     public function __construct()
     {
-        $db = DB::getInstance();
-        $this->db = $db;
-        $this->pdo = $db->pdo;
+        $this->pdo = DB::getInstance()->pdo;
     }
 
     // mailをキーにDB検索し見つかったら結果を配列で返す

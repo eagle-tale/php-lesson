@@ -20,17 +20,15 @@ class UserService
 
     public function delete(UserModel $user)
     {
-        $res = $this->userRepository->delete($user->mail);
+        $this->userRepository->delete($user);
         return true;
     }
 
     public function update(UserModel $oldUser, UserModel $newUser)
     {
-        $res = $this->userRepository->update($oldUser, $newUser);
+        $this->userRepository->update($oldUser, $newUser);
         return true;
     }
-
-
 
     public function isValidUserInfo($id, $password)
     {

@@ -8,10 +8,12 @@ $userController = new UserController;
 $reminderController = new ReminderController;
 $date = new DateTime();
 $username = $_SESSION['id'];
-$mail_input = $_POST['mail'];
+$mail_input = (string) $_POST['mail'];
 
 echo '現在のユーザー: ' . $username . '<br>';
 echo '入力されたアドレス: ' . $mail_input . '<br>';
+
+// TODO: このページだけオブジェクト指向になっていない
 
 // POSTからの受け取り
 if (isset($mail_input)) {
@@ -48,7 +50,7 @@ if (isset($mail_input)) {
         $message = <<< EOD
         以下のURLよりアクセスして、パスワードの再発行を行ってください。\n
         有効期限は  {$expire_date}  までです。\n
-        http://localhost/nanobase/views/re-register_password.php?hash={$hash};
+        http://localhost/nanobase/views/re-register_password.php?hash={$hash}
 
         EOD;
 
@@ -73,17 +75,16 @@ if (isset($mail_input)) {
 
 //* DEBUG ZONE */
 
-
-echo uniqid(bin2hex(random_bytes(1)));
-echo '<br>';
-echo $date->format('Y/m/d H:i:s') . '<br>';
+// echo uniqid(bin2hex(random_bytes(1)));
+// echo '<br>';
+// echo $date->format('Y/m/d H:i:s') . '<br>';
 //* DEBUG ZONE */
 
 ?>
 
 <!-- メニュー表示 -->
 <?php
-require('Menu.php');
+include_once('.\Menu.php');
 $menu = new Menu;
 $menu->show();
 ?>

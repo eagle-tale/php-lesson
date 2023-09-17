@@ -1,7 +1,7 @@
 <?php
 interface IUserRepository
 {
-    public function find($id);
+    public function find($mail);
 
     public function findAll();
 

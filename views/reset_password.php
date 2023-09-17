@@ -1,7 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('Asia/Tokyo');
-require('Menu.php');
+include_once('.\Menu.php');
 ?>
 
 <!DOCTYPE html>

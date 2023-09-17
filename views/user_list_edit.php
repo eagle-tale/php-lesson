@@ -7,7 +7,7 @@ if ($_SESSION['permission'] == 0) {
     exit();
 }
 
-require('Menu.php');
+include_once('.\Menu.php');
 include_once('..\controllers\UserController.php');
 $controller = new UserController();
 $userList_array = $controller->userList();

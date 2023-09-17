@@ -15,7 +15,7 @@ $auth = new AuthController();
 
 // authcodeがあれば入力された数字が正しいか確認
 if (isset($_POST['authcode'])) {
-    $authcode = $_POST['authcode'];
+    $authcode = (string) $_POST['authcode'];
     echo 'inputcode:' . $authcode . '<br>';
     if ($auth->isCodeValid($mail, $authcode)) {
         $auth->authSuccess($mail);

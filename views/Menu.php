@@ -18,5 +18,6 @@ class Menu
         foreach ($this->defaultMenu_array as $menu) {
             echo $menu;
         }
+        return true;
     }
 }

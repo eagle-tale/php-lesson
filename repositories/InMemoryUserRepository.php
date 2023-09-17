@@ -1,4 +1,6 @@
 <?php
+include_once('../UserStore.php');
+
 class InMemoryUserRepository implements IUserRepository
 {
 

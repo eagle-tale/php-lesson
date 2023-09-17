@@ -32,34 +32,4 @@ class DB
         }
         return $_instance;
     }
-
-    // メソッド
-
-    ///
-    // ログイン時の認証
-    ///
-    public function isMatchIdPass($id, $password): ?bool
-    {
-        try {
-            $query = 'SELECT mail, password, permission FROM users WHERE mail = :id;';
-            $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':id', $id);
-            $stmt->execute();
-            $queryResult = $stmt->fetch();
-
-            // 認証処理(指定したハッシュがパスワードにマッチしているかチェック)
-            if (password_verify($password, $queryResult['password'])) {
-                echo '認証成功';
-
-                return true;
-            } else {
-                echo '認証失敗';
-
-                return false;
-            }
-        } catch (PDOException $e) {
-            echo ('データベースエラー（PDOエラー）:' . $e->getMessage());
-            return false;
-        }
-    }
 }

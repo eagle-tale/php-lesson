@@ -5,23 +5,19 @@ include_once('..\db.php');
 
 class UserRepository implements IUserRepository
 {
-
-    private readonly DB $db;
     private readonly PDO $pdo;
 
     public function __construct()
     {
-        $db = DB::getInstance();
-        $this->db = $db;
-        $this->pdo = $db->pdo;
+        $this->pdo = DB::getInstance()->pdo;
     }
 
-    public function find($id)
+    public function find($mail)
     {
         try {
-            $query = "SELECT * FROM users WHERE mail = :id;";
+            $query = "SELECT * FROM users WHERE mail = :mail;";
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':mail', $mail, PDO::PARAM_STR);
             $stmt->execute();
             $queryResult = $stmt->fetch(PDO::FETCH_ASSOC);
             return $queryResult;

@@ -12,8 +12,10 @@ $password2 = $_POST['password2'];
 if ($password == $password2) {
     if ($userController->updatePassword($user_id, $password)) {
         echo 'パスワード更新できました。';
+        echo '<li><a href="./">TOP</a></li>';
     } else {
         echo 'パスワード更新できなかった';
+        echo '<li><a href="./">TOP</a></li>';
     }
 } else {
     echo '確認で入力されたパスワードが異なっています。<br>';

@@ -3,7 +3,6 @@
 require '../vendor/autoload.php';
 require_once '..\vendor\phpgangsta\googleauthenticator\PHPGangsta\GoogleAuthenticator.php';
 include_once('..\repositories\AuthRepository.php');
-include_once('..\models\AuthModel.php');
 
 class AuthService
 {
