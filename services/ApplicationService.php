@@ -40,10 +40,10 @@ class ApplicationService
         return true;
     }
 
-    public function userInfo($id)
+    public function userInfo($mail)
     {
         // TODO: 本当はUserModelを作ってcreateUserResponseDataに渡した方が良い
-        $userInfo = $this->userRepository->find($id);
+        $userInfo = $this->userRepository->find($mail);
 
         if ($userInfo == NULL) {
             // IDが見つからない場合
